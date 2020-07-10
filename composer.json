@@ -1,0 +1,15 @@
+{
+    "name": "gunna/social-sebo",
+    "authors": [
+        {
+            "name": "SatellaSoft",
+            "email": "satellasoft@gmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "ap\\" : "app/"
+        }
+    }
+}
