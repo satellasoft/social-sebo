@@ -3,7 +3,7 @@
 namespace app\site\controller;
 use app\core\Controller;
 
-class HomeController extends Controller
+class LoginController extends Controller
 {
     /**
      * __construct
@@ -22,6 +22,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-       $this->view('home/main');
+       $this->view('login/login');
     }
 }
