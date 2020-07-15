@@ -7,10 +7,12 @@
             "email": "satellasoft@gmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "twig/twig": "^3.0"
+    },
     "autoload": {
         "psr-4": {
-            "ap\\" : "app/"
+            "app\\" : "app/"
         }
     }
 }
