@@ -13,7 +13,13 @@
                 </ul>
             </li>
             <li><a href="{{BASE}}about/">Quem Somos</a></li>
-            <li><a href="{{BASE}}login">Entrar</a></li>
+            <li>
+                {% if userName == null %}
+                <a href="{{BASE}}login">Entrar</a>
+                {% else %}
+                <a href="{{BASE}}dashboard">{{userName}}</a>
+                {% endif %}
+            </li>
         </ul>
     </nav>
 </header>

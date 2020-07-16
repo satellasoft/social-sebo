@@ -7,7 +7,7 @@
     <title>{% block title %}{% endblock %} - Social Sebo</title>
     <link rel="stylesheet" href="{{BASE}}vendor/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="{{BASE}}assets/css/style.css">
-    <link rel="shortcut icon"  href="{{BASE}}assets/img/favicon.ico">
+    <link rel="shortcut icon" href="{{BASE}}assets/img/favicon.ico">
 </head>
 
 <body>
@@ -19,6 +19,9 @@
     <br>
 
     {% include 'partials/footer.twig.php' %}
+
+    <script src="{{BASE}}assets/js/script.min.js"></script>
+    {% block scripts %}{% endblock %}
 </body>
 
 </html>

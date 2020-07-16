@@ -14,6 +14,8 @@ class Controller
         $twig->addGlobal('HOST', HOST);
         $twig->addGlobal('DATE_TIME', DATE_TIME);
 
+        $twig->addGlobal('userName', \app\classes\Session::getValue('nome'));
+
         echo $twig->render($view . '.twig.php', $params);
     }
 
@@ -22,8 +24,9 @@ class Controller
         http_response_code($httpCode);
 
         $this->view('partials/message', [
-            'title'   => $title,
-            'message' => $message
+            'title'     => $title,
+            'message'   => $message,
+            'httpCode' => $httpCode
         ]);
     }
 }

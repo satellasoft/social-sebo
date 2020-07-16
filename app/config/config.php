@@ -5,6 +5,8 @@ define('BASE', '/social-sebo/');
 define('HOST', 'http://localhost/social-sebo/');
 define('DATE_TIME', 'd/m/Y H:i:s');
 
+define('SECURITY_REDIRECT', '/social-sebo/login');
+
 define('REMOVE_INDEX_COUNT', 1);//Quantidade de indices a serem removidos
 
 define('DB_HOST', 'localhost');

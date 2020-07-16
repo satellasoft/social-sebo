@@ -49,3 +49,8 @@ function arrayTree($array, int $maxColumns = 4)
 
     return $newArr;
 }
+
+function passwordHash(string $pass)
+{
+    return password_hash($pass, PASSWORD_DEFAULT);
+}
