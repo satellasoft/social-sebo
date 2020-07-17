@@ -29,7 +29,6 @@ class UsuarioModel
         return $this->pdo->ExecuteNonQuery($sql, $params);
     }
 
-    
     public function update(Usuario $usuario)
     {
         $sql = 'UPDATE usuario SET nome = :nome WHERE id = :id';
@@ -37,6 +36,40 @@ class UsuarioModel
         $params = [
             ':id'  => $usuario->getId(),
             ':nome'   => $usuario->getNome()
+        ];
+
+        return $this->pdo->ExecuteNonQuery($sql, $params);
+    }
+
+    public function updatePasswordByToken(string $senha, string $token)
+    {
+        $sql = 'UPDATE usuario SET senha = :senha, token = null WHERE token = :token';
+
+        $params = [
+            ':token' => $token,
+            ':senha' => $senha
+        ];
+
+        return $this->pdo->ExecuteNonQuery($sql, $params);
+    }
+
+    public function updatePassword(string $senha, int $usuarioId)
+    {
+        $sql = 'UPDATE usuario SET senha = :senha WHERE id = :usuarioid';
+
+        $params = [
+            ':usuarioid' => $usuarioId,
+            ':senha'     =>$senha
+        ];
+
+        return $this->pdo->ExecuteNonQuery($sql, $params);
+    }
+
+    public function updateToken(int $id, string $token){
+        $sql = 'UPDATE usuario SET token = :token WHERE id = :id';
+        $params = [
+            ':token' => $token,
+            ':id' => $id
         ];
 
         return $this->pdo->ExecuteNonQuery($sql, $params);
@@ -70,6 +103,24 @@ class UsuarioModel
     public function dadosPorEmail(string $email)
     {
         $sql = 'SELECT id, nome, senha FROM usuario WHERE email = :email AND status = :status';
+
+        $dr = $this->pdo->ExecuteQueryOneRow($sql, [
+            ':email'  => $email,
+            ':status' => 1
+        ]);
+
+        return $this->collection($dr);
+    }
+    
+    /**
+     * Retorna os dados do usuário através do e-mail para redefinir sua senha
+     *
+     * @param  string $email
+     * @return Usuario
+     */
+    public function dadosPorEmailRedefinir(string $email)
+    {
+        $sql = 'SELECT id, nome, email FROM usuario WHERE email = :email AND status = :status';
 
         $dr = $this->pdo->ExecuteQueryOneRow($sql, [
             ':email'  => $email,

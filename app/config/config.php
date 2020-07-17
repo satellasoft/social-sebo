@@ -9,7 +9,16 @@ define('SECURITY_REDIRECT', '/social-sebo/login');
 
 define('REMOVE_INDEX_COUNT', 1);//Quantidade de indices a serem removidos
 
+//DATABASE
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_NAME', 'social-sebo');
+
+//EMAIL
+define('MAIL_USER', '');//E-mail de login
+define('MAIL_PASS', '');//Senha de login
+define('MAIL_HOST', '');//Servidor de saída
+define('MAIL_PORT', 000);//Porta de saída
+define('MAIL_MAIL', '');//E-mail do remetente
+define('MAIL_NAME', '');//Nome do remetente

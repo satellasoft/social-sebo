@@ -23,6 +23,7 @@
                 <a href="{{BASE}}dashboard">{{userName}}</a>
                 <ul>
                     <li><a href="{{BASE}}login/editar">Editar</a></li>
+                    <li><a href="{{BASE}}login/senha">Alterar senha</a></li>
                     <li><a href="{{BASE}}login/logout">Sair</a></li>
                 </ul>
             </li>
