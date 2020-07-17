@@ -13,13 +13,20 @@
                 </ul>
             </li>
             <li><a href="{{BASE}}about/">Quem Somos</a></li>
+
+            {% if userName == null %}
             <li>
-                {% if userName == null %}
                 <a href="{{BASE}}login">Entrar</a>
-                {% else %}
-                <a href="{{BASE}}dashboard">{{userName}}</a>
-                {% endif %}
             </li>
+            {% else %}
+            <li>
+                <a href="{{BASE}}dashboard">{{userName}}</a>
+                <ul>
+                    <li><a href="{{BASE}}login/editar">Editar</a></li>
+                    <li><a href="{{BASE}}login/logout">Sair</a></li>
+                </ul>
+            </li>
+            {% endif %}
         </ul>
     </nav>
 </header>

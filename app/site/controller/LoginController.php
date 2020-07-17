@@ -36,6 +36,14 @@ class LoginController extends Controller
         $this->view('login/cadastro');
     }
 
+    public function editar()
+    {
+        \app\classes\security::protect();
+        $this->view('login/editar', [
+            'usuario' => (new UsuarioModel())->obterPorId(\app\classes\Session::getValue('id'))
+        ]);
+    }
+
     /* ####### INTERNAL ####### */
 
     public function auth()
@@ -90,6 +98,24 @@ class LoginController extends Controller
         }
 
         $this->showMessage('Usuário cadastrado', 'Usuário cadastrado com sucesso!', 200);
+    }
+
+    public function update()
+    {
+        $usuario = $this->getInput(\app\classes\Session::getValue('id'));
+
+        if (strlen($usuario->getNome()) <= 5){
+            $this->showMessage('Formulário inválido', 'Os dados fornecidos são inválidos.', 422);
+            return;
+        }
+
+        //Tenta Alterar
+        if (!(new UsuarioModel)->update($usuario)) {
+            $this->showMessage('Erro ao alterar', 'Houve um erro ao tentar alterar, tente novamente mais tarde.', 500);
+            return;
+        }
+
+        $this->showMessage('Usuário alterado', 'Usuário alterado com sucesso, recomendamos fazer o login novamente para que algumas informaçõe sejam reprocessadas!', 200);
     }
 
     private function validate(

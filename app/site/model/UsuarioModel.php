@@ -29,6 +29,19 @@ class UsuarioModel
         return $this->pdo->ExecuteNonQuery($sql, $params);
     }
 
+    
+    public function update(Usuario $usuario)
+    {
+        $sql = 'UPDATE usuario SET nome = :nome WHERE id = :id';
+
+        $params = [
+            ':id'  => $usuario->getId(),
+            ':nome'   => $usuario->getNome()
+        ];
+
+        return $this->pdo->ExecuteNonQuery($sql, $params);
+    }
+
     public function checaEmailExiste(string $email)
     {
         $sql = 'SELECT id FROM usuario WHERE email = :email';
@@ -43,6 +56,16 @@ class UsuarioModel
         return false;
     }
 
+    public function obterPorId(int $usuarioId)
+    {
+        $sql = 'SELECT nome, email FROM usuario WHERE id = :id';
+
+        $dr = $this->pdo->ExecuteQueryOneRow($sql, [
+            ':id' => $usuarioId
+        ]);
+
+        return $this->collection($dr);
+    }
 
     public function dadosPorEmail(string $email)
     {
@@ -56,7 +79,8 @@ class UsuarioModel
         return $this->collection($dr);
     }
 
-    private function collection($param){
+    private function collection($param)
+    {
         return new Usuario(
             $param['id'] ?? null,
             $param['nome'] ?? null,

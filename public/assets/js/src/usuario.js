@@ -40,3 +40,13 @@ function validarCadastro() {
 
     return true;
 }
+
+function validarEditar() {
+
+    if (getValueById('txtNome').trim().length <= 5) {
+        getById('dvAlert').innerHTML = '<div class="alert alert-warning">Informe um nome válido.</div>';
+        return false;
+    }
+
+    return true;
+}
