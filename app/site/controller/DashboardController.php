@@ -23,6 +23,10 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $this->view('dashboard/main');
+        $userId = \app\classes\Session::getValue('id');
+
+        $this->view('dashboard/main', [
+            'livros' => (new \app\site\model\LivroModel())->getUserLivros($userId)
+        ]);
     }
 }

@@ -1,6 +1,7 @@
 'use strict'
 
 function validarCadastro(validarId) {
+    getById('dvAlert').innerHTML = '';
 
     if (validarId && getValueById('txtId') <= 0) {
         getById('dvAlert').innerHTML = '<div class="alert alert-warning">ID inválido.</div>';

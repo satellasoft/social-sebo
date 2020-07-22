@@ -79,7 +79,7 @@ class CategoriaController extends Controller
         $result = $this->categoriaModel->insert($categoria);
 
         if ($result === -1) {
-            $this->showMessage('Erro ao cadastrar inválido', 'Houve um erro ao tentar cadastrar, tente novamente mais tarde.', 500);
+            $this->showMessage('Erro ao cadastrar', 'Houve um erro ao tentar cadastrar, tente novamente mais tarde.', 500);
             return;
         }
 

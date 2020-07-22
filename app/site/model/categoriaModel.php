@@ -52,7 +52,7 @@ class CategoriaModel
 
     public function getAll()
     {
-        $sql = 'SELECT * FROM categoria';
+        $sql = 'SELECT * FROM categoria ORDER BY nome ASC';
 
         $dt = $this->pdo->ExecuteQuery($sql);
 
