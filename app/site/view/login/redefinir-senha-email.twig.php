@@ -5,7 +5,6 @@
 {% block body %}
 
 <div class="center">
-
     <div style="max-width:500px">
         <h1>Recuperar senha</h1>
         <div class="box">
@@ -27,7 +26,6 @@
         </div>
     </div>
 </div>
-
 {% endblock %}
 
 {% block scripts %}

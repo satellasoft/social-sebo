@@ -1,0 +1,15 @@
+####### CATEGORIA #######
+
+/categoria/ = Global, site
+
+/categoria/listar = Restrito, admin
+/categoria/nova = Restrito, admin
+/categoria/editar/{id} = Restrito, admin
+
+####### LIVRO #######
+
+/livro/ver/{slug} = PUBLICO
+/livro/ = LISTA MEUS LIVRVOS,  = RESTRITO
+/livro/novo/ = RESTRITO
+/livro/thumb/{id} = RESTRITO
+livro/editar/{id} = RESTRITO

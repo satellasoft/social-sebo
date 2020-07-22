@@ -14,6 +14,12 @@
             </li>
             <li><a href="{{BASE}}about/">Quem Somos</a></li>
 
+            {% if userName != null %}
+            <li>
+                <a href="{{BASE}}dashboard">Dashboard</a>
+            </li>
+            {% endif %}
+
             {% if userName == null %}
             <li>
                 <a href="{{BASE}}login">Entrar</a>
@@ -28,6 +34,7 @@
                 </ul>
             </li>
             {% endif %}
+
         </ul>
     </nav>
 </header>
