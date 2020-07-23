@@ -66,7 +66,47 @@ class LivroController extends Controller
         ]);
     }
 
+    public function thumb($idLivro = null)
+    {
+        $idLivro = filter_var($idLivro, FILTER_SANITIZE_STRING);
+        $userId  = \app\classes\Session::getValue('id');
+
+        $livro = $this->livroModel->getThumbById($idLivro, $userId);
+
+        $this->view('livro/thumb', [
+            'idLivro' => $idLivro,
+            'thumb'   => $livro->thumb != null ? HOST . IMAGE_PATH . $livro->thumb : null
+        ]);
+    }
+
     /* #### INTERNAL ####  */
+
+    public function updateThumb($idLivro)
+    {
+        $idLivro = filter_var($idLivro, FILTER_SANITIZE_STRING);
+        $userId = \app\classes\Session::getValue('id');
+
+        $livro = $this->livroModel->getThumbById($idLivro, $userId);
+
+        if ($livro->id == null || $livro->id <= 0)
+            return $this->showMessage('Livro não encontrado', 'O livro que você procura para alterar não pode ser encontrado.', 404);
+
+        if (!\app\classes\Upload::validate($_FILES['flThumb']))
+            return $this->showMessage('Imagem inválida', 'A imagem está no formato inválido.', 422);
+
+        $imageName = \app\classes\Upload::upload($_FILES['flThumb']);
+        if ($imageName == null || $imageName == 'error')
+            return $this->showMessage('Erro ao upload imagem', 'Houve um erro ao tentar fazer o upload da imagem, tente novamente mais tarde.', 500);
+
+        if (!$this->livroModel->updateThumb($imageName, $idLivro, $userId)) {
+            unlink(IMAGE_PATH . $imageName);
+            $this->showMessage('Erro ao alterar thumb', 'Não foi possível alterar a thumb, por favor, tente novamente mais tarde.', 500);
+        }
+
+        unlink(IMAGE_PATH  . $livro->thumb);
+
+        redirect(BASE . 'livro/thumb/' . $idLivro);
+    }
 
     public function insert()
     {

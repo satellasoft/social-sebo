@@ -35,6 +35,7 @@
                     <td>{{livro.categoria.nome}}</td>
                     <td>{{livro.dataCadastro | date(DATE_TIME)}}</td>
                     <td>
+                        <a href="{{BASE}}livro/thumb/{{livro.id}}" class="btn btn-primary btn-sm mr-2">Thumb</a>
                         <a href="{{BASE}}livro/editar/{{livro.id}}" class="btn btn-warning btn-sm">Editar</a>
                     </td>
                 </tr>

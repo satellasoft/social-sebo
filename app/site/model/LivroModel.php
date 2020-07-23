@@ -55,6 +55,18 @@ class LivroModel
         return $this->pdo->ExecuteNonQuery($sql, $params);
     }
 
+    public function updateThumb(string $thumb, int $livroId, int $userId)
+    {
+        $sql = 'UPDATE livro SET thumb = :thumb WHERE id = :livroid AND usuario_id = :usuarioid';
+        $params = [
+            ':livroid'   => $livroId,
+            ':thumb'     => $thumb,
+            ':usuarioid' => $userId
+        ];
+
+        return $this->pdo->ExecuteNonQuery($sql, $params);
+    }
+
     public function getUserLivros(int $userId)
     {
         $sql = 'SELECT l.id, l.slug, l.titulo, l.status, l.data_cadastro, c.nome as categoria_nome FROM livro l INNER JOIN categoria c ON c.id = l.categoria_id WHERE l.usuario_id = :usuarioid ORDER BY l.titulo ASC';
@@ -69,6 +81,21 @@ class LivroModel
             $list[] = $this->collection($dr);
 
         return $list;
+    }
+
+    public function getThumbById(int $livroId, int $userId)
+    {
+        $sql = 'SELECT id, thumb FROM livro WHERE id = :livroid AND usuario_id = :usuarioid';
+
+        $dr = $this->pdo->ExecuteQueryOneRow($sql, [
+            ':livroid' => $livroId,
+            ':usuarioid' => $userId
+        ]);
+
+        return (object)[
+            'id'    => $dr['id'] ?? null,
+            'thumb' => $dr['thumb'] ?? null
+        ];
     }
 
     public function getById(int $livroId, int $userId)

@@ -35,8 +35,18 @@ function validarCadastro(validarId) {
 
     var sinopse = CKEDITOR.instances['txtSinopse'].getData()
 
-    if (sinopse.length < 10 ) {
+    if (sinopse.length < 10) {
         getById('dvAlert').innerHTML += '<div class="alert alert-warning">Sinopse inválida.</div>';
+        return false;
+    }
+
+    return true;
+}
+
+function validarThumb() {
+
+    if (getById('flThumb').files.length == 0) {
+        getById('dvAlert').innerHTML = '<div class="alert alert-warning">Selecione uma imagem.</div>';
         return false;
     }
 
