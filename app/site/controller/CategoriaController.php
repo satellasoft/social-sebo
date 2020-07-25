@@ -27,7 +27,23 @@ class CategoriaController extends Controller
      */
     public function index()
     {
-        $this->view('categoria/main');
+        $this->view('categoria/main', [
+            'categorias' => $this->categoriaModel->getAll()
+        ]);
+    }
+
+    public function ver(string $slug = '')
+    {
+        $slug = filter_var($slug, FILTER_SANITIZE_STRING);
+        $slug = strtolower($slug);
+
+        $livros = (new \app\site\model\LivroModel())->getSlugLivros($slug);
+        $categoria = $this->categoriaModel->getBySlug($slug);
+
+        $this->view('categoria/ver', [
+            'livros'    => arrayTree($livros, 4),
+            'categoria' => $categoria
+        ]);
     }
 
     public function lista()

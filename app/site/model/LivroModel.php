@@ -67,6 +67,24 @@ class LivroModel
         return $this->pdo->ExecuteNonQuery($sql, $params);
     }
 
+    public function getSlugLivros(string $slug)
+    {
+        $sql = 'SELECT l.slug, l.titulo, l.thumb FROM livro l INNER JOIN categoria c ON c.id = l.categoria_id WHERE LOWER(c.slug) = :slug AND l.status = :status ORDER BY l.titulo ASC';
+        $param = [
+            ':slug'   => $slug,
+            ':status' => 1//ativo
+        ];
+        
+        $dt = $this->pdo->ExecuteQuery($sql, $param);
+
+        $list = [];
+
+        foreach ($dt as $dr)
+            $list[] = $this->collection($dr);
+
+        return $list;
+    }
+
     public function getUserLivros(int $userId)
     {
         $sql = 'SELECT l.id, l.slug, l.titulo, l.status, l.data_cadastro, c.nome as categoria_nome FROM livro l INNER JOIN categoria c ON c.id = l.categoria_id WHERE l.usuario_id = :usuarioid ORDER BY l.titulo ASC';

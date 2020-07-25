@@ -6,10 +6,11 @@
                     <img src="{{BASE}}assets/img/logo/social-sebo-logo.svg" alt="Social Sebo Logo">
                 </a>
             </li>
-            <li><a href="#">Categoria</a>
+            <li><a href="{{BASE}}categoria">Categoria</a>
                 <ul>
-                    <li><a href="{{BASE}}categoria/horror">Horror</a></li>
-                    <li><a href="{{BASE}}categoria/comedia">Comédia</a></li>
+                    <li><a href="{{BASE}}categoria/ver/acao">Ação</a></li>
+                    <li><a href="{{BASE}}categoria/ver/comedia">Comédia</a></li>
+                    <li><a href="{{BASE}}categoria/ver/terror">Terror</a></li>
                 </ul>
             </li>
             <li><a href="{{BASE}}about/">Quem Somos</a></li>

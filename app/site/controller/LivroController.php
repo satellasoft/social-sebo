@@ -52,6 +52,8 @@ class LivroController extends Controller
 
     public function editar($livroId = null)
     {
+        \app\classes\security::protect();
+
         $livroId = filter_var($livroId, FILTER_SANITIZE_NUMBER_INT);
         $userId  = \app\classes\Session::getValue('id');
 
@@ -68,6 +70,8 @@ class LivroController extends Controller
 
     public function thumb($idLivro = null)
     {
+        \app\classes\security::protect();
+
         $idLivro = filter_var($idLivro, FILTER_SANITIZE_STRING);
         $userId  = \app\classes\Session::getValue('id');
 
@@ -83,6 +87,8 @@ class LivroController extends Controller
 
     public function updateThumb($idLivro)
     {
+        \app\classes\security::protect();
+
         $idLivro = filter_var($idLivro, FILTER_SANITIZE_STRING);
         $userId = \app\classes\Session::getValue('id');
 
@@ -110,6 +116,8 @@ class LivroController extends Controller
 
     public function insert()
     {
+        \app\classes\security::protect();
+
         $livro = $this->getInput();
 
         if (!$this->validate($livro, false))
@@ -128,6 +136,8 @@ class LivroController extends Controller
 
     public function update($id = null)
     {
+        \app\classes\security::protect();
+
         $livro = $this->getInput($id);
 
         $userId  = \app\classes\Session::getValue('id');
