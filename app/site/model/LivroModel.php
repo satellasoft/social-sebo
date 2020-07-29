@@ -69,9 +69,27 @@ class LivroModel
 
     public function getSlugLivros(string $slug)
     {
-        $sql = 'SELECT l.slug, l.titulo, l.thumb FROM livro l INNER JOIN categoria c ON c.id = l.categoria_id WHERE LOWER(c.slug) = :slug AND l.status = :status ORDER BY l.titulo ASC';
+        $sql = 'SELECT l.id, l.slug, l.titulo, l.thumb FROM livro l INNER JOIN categoria c ON c.id = l.categoria_id WHERE LOWER(c.slug) = :slug AND l.status = :status ORDER BY l.titulo ASC';
         $param = [
             ':slug'   => $slug,
+            ':status' => 1//ativo
+        ];
+        
+        $dt = $this->pdo->ExecuteQuery($sql, $param);
+
+        $list = [];
+
+        foreach ($dt as $dr)
+            $list[] = $this->collection($dr);
+
+        return $list;
+    }
+
+    public function getLasts(int $quantidade = 12)
+    {
+        $sql = 'SELECT l.slug, l.titulo, l.thumb, l.valor FROM livro l INNER JOIN categoria c ON c.id = l.categoria_id WHERE l.status = :status ORDER BY l.titulo ASC LIMIT :quantidade';
+        $param = [
+            ':quantidade'   => $quantidade,
             ':status' => 1//ativo
         ];
         
@@ -129,6 +147,18 @@ class LivroModel
         return $this->collection($dr);
     }
 
+    public function getBySlug(string $slug)
+    {
+        $sql = 'SELECT l.id, l.titulo, l.slug, l.valor, l.thumb, l.sinopse, l.data_cadastro, u.nome as usuario_nome FROM livro l INNER JOIN usuario u ON u.id = l.usuario_id WHERE l.status = 1 AND LOWER(l.slug) = :slug';
+        $params = [
+            ':slug' => $slug
+        ];
+
+        $dr = $this->pdo->ExecuteQueryOneRow($sql, $params);
+
+        return $this->collection($dr);
+    }
+
     private function collection($param)
     {
         return new Livro(
@@ -137,7 +167,7 @@ class LivroModel
             $param['slug'] ?? null,
             $param['valor'] ?? null,
             $param['thumb'] ?? null,
-            $param['sinopse'] ?? null,
+            html_entity_decode($param['sinopse'] ?? null),
             $param['data_cadastro'] ?? null,
             $param['status'] ?? null,
             new Categoria(

@@ -54,3 +54,9 @@ function passwordHash(string $pass)
 {
     return password_hash($pass, PASSWORD_DEFAULT);
 }
+
+function responseJson($param)
+{
+    header('Content-type: application/json; charset=utf-8');
+    echo json_encode($param);
+}

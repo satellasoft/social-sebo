@@ -20,6 +20,7 @@
 
     {% include 'partials/footer.twig.php' %}
 
+    <input type="hidden" id="txtBase" value="{{BASE}}">
     <script src="{{BASE}}assets/js/script.min.js"></script>
     {% block scripts %}{% endblock %}
 </body>

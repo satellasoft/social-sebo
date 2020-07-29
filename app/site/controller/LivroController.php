@@ -36,9 +36,14 @@ class LivroController extends Controller
     {
         $slug = filter_var($slug, FILTER_SANITIZE_STRING);
 
-        dd($slug);
+        $livro = $this->livroModel->getBySlug($slug);
 
-        $this->view('livro/ver');
+        if ($livro->getTitulo() == null)
+            return $this->showMessage('Livro não encontrado', 'O livro que você procura não foi encontrado', 404);
+
+        $this->view('livro/ver', [
+            'livro' => $livro
+        ]);
     }
 
     public function novo()

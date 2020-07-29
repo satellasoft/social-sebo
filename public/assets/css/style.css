@@ -28,7 +28,7 @@
     box-shadow: 0 0 10px #ccc;
 }
 
-.small-font{
+.small-font {
     font-size: .8em;
 }
 
@@ -100,4 +100,16 @@ footer a {
 
 footer a:hover {
     color: #FFF;
+}
+
+.div-comentario {
+    background-color: #fff;
+    padding: 10px;
+    margin:10px 0;
+}
+
+.nome-comentario{
+    font-size:1.2em;
+    color: #FF9800;
+    font-weight: bold;
 }

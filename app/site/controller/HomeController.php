@@ -1,6 +1,7 @@
 <?php
 
 namespace app\site\controller;
+
 use app\core\Controller;
 
 class HomeController extends Controller
@@ -12,7 +13,6 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-
     }
 
     /**
@@ -22,6 +22,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-       $this->view('home/main');
+        $livros = (new \app\site\model\LivroModel())->getLasts(12);
+
+        $this->view('home/main', [
+            'livros' => arrayTree($livros, 4)
+        ]);
     }
 }

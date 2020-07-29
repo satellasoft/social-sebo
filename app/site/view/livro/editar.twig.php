@@ -7,6 +7,7 @@
     <h1>Editar livro</h1>
 
     <a href="{{BASE}}dashboard" class="btn btn-secondary btn-sm">Voltar</a>
+    <a href="{{BASE}}livro/thumb/{{livro.id}}" class="btn btn-primary btn-sm mr-2">Thumb</a>
 
     <hr>
 
